@@ -1,0 +1,508 @@
+#-----------------------------------------------------------------------------------
+
+Apuntes CLase 4: Módulos y Python Científico
+
+#------------------------------------------------------------------------------------
+
+Módulos
+
+Un mpodulo es un archivo que contiene código reutilizable (funciones, variables, clases, etc) que
+pueden ser importados en otros programas
+
+Es decir, un archivo.py que guarda herramientas de código para usarlas en otros scripts
+
+#----------------------------------------------------------------------------------
+
+¿Para que puede ser útil?
+
+Imagina que tienes que hacer un script de python para una tarea, y recuerdas que hace tiempo ya 
+creaste una función que hace exactamente lo que necesitas. Para no volver a tener que hacer la función
+puedes importarla y ahorrar mucho tiempo, a la vez que dejar tu script más limmpio
+
+Además, se pueden importar módulos desde internet que otras personas han creado
+
+#---------------------------------------------------------------------------------
+
+Pip (Package Installer for Python)
+
+Pip es el gestor de paquetes (módulos) que viene instalado junto a Python (fácil de usar por bash!)
+
+Ejemplo:
+
+$pip install pandas
+$python
+>import pandas #recién instalada!
+
+#si no hubiera estado instalado no hubiera podido importarlo!
+
+¿Dónde están los programas?
+
+#---------------------------------------------------------------------------------------
+
+el PATH
+
+La variable de entorno PATH tiene las carpetas donde buscar programas
+
+Ejemplo: Cuando escribo ls en Bash, viene desde el PATH...
+
+Consola...(echo ${PATH})
+
+#echo: se usa para mostrar en bash text o variables en la terminal (imprime algo en la pantalla)
+
+Es posible modificar el PATH para tener programas en nuevas carpetas
+
+#-----------------------------------------------------------------------------------------
+
+Crear módulo
+
+#Para crear un módulo se puede crear un archivo.py
+
+Ejemplo:
+
+$nano operaciones.py
+
+>def suma(x,y): return x+y
+>def mult(x,y): return x*y
+
+#-----
+
+después, en Python
+
+>import operaciones #Debe estar en el PATH
+	#para importar no es necesario poner el ".py", ya que Python autom busca archivos con
+	#esa extención
+
+>from operaciones import suma,mult
+
+	#esta es otra forma de importar, en donde se importan solo esas funciones del módulo
+	#(en caso de que hubiera tenido más)
+
+	#ejemplo: from sys import argv
+
+>operaciones.suma(2,3) #5
+
+>operaciones.mult(2,3) #6
+
+#---------------------------------------------------------------------------------------------
+
+el PATH en Python
+
+$python -m site
+
+#Esto sirve para mostrar información de como Python esta configurado en el sistema, especialmente
+#en que rutas busca módulos y paquetes
+
+	python: ejecuta elintérprete de Python
+
+	-m: ejecutar un módulo como si fuera un script
+
+	site: módulo de la librería estándar de Python que administra rutas de paquetes, directorios
+	y configuración del entorno de Python
+
+#----------------------------------------------------------------------------------------------
+
+Se puede extender con PYTHONPATH
+
+$export PYTHONPATH=/home/oscar/otraCarpeta
+
+#En otras palabras, define una variable de entorno que dice a Python donde buscar módulos adicionales
+
+
+	export: Crea una variable de entorno, disponible para otros programas ejecutados
+
+	PYTHONPATH: variable especial que Python usa para buscar módulos
+	   (normalmente busca en rutas de sys.path, site-packages, y en la carpeta actual)
+
+	#si defines PYTHONPATH agregas nuevas carpetas a esa búsqueda
+
+	/home/oscar/otraCarpeta: es lacarpeta que quiero que Python también revise cuando hago
+	"import modulo"
+
+
+$python -m site
+
+
+Extra: la variable de ambiente puede verse con $echo ${PYTHONPATH}
+
+#----------------------------------------------------------------------------------------------
+
+Python científico
+
+Python es un lenguaje interpretado (+ lento), no obstante usa librerías muy rápidas, lo cual lo
+vuelve ideal para la ciencia
+
+#---------------------------------------------------------------------------------------------
+
+Librería math
+
+>import math
+
+La librería math es un módulo de la librería estándar que contiene funciones matemáticas avanzadas
+(masallade sumas, restas,multiplicación, división, y potencias
+
+Ejemplo:
+	sqrt(): raíz
+	pow():potencia
+	exp(): exponencial
+	log(): logaritmo
+	sin(), cos(), tan(), ...
+	radians(), degrees(): conversión de ángulos
+	ceil(), floor(), trunc(), fabs(): redondeo y trunqueo
+	pi, e (euler), inf (infinito), nan (not a number)
+
+
+#--------------------------------------------------------------------------------------------
+
+Librería random
+
+>import random
+
+La librería random sirve para generar números aleatorios o seleccionar elementos al azar.
+Es usada con frecuencia en simulaciones, muestreo de datos, estadística, modelos computacionales,
+y juegos, entre otros
+
+random.random(a): número aleatorio entre el 0 y el 1
+
+random.randit(a,b): número entero en un rango
+
+random.uniform(a,b): número decimal en un rango
+
+random.choice(lista): elegir un elemento de una lista al azar
+
+random.sample(lista, k): elegir varios elementos de una lista al azar (k veces)
+
+random.shuffle(lista): mezclar una lista (reordenarla)
+
+random.seed(k): controla la aletoriedad y hace que los numeros "aleatorios" de Python se repitan
+exactamente igual k veces
+
+#-----------------------------------------------------------------------------------------
+
+Librería statistics
+
+>import statistics as st
+
+#usar el "as" te permite llamar a la librería que importaste con otro nombre, facilitando la escritura
+#y permitiendo que no hayan dos funciones o módulos con el mismo nombre
+
+La librería statistics permite calcular estadísticas básicas de un conjunto de datos. Muy útil cuando
+se tiene una lista de números
+
+Ejemplo:
+
+	st.mean(lista): calcula promedio de una lista
+
+	st.median(lista): calcula la mediana
+
+	st.mode(lista): calcula la moda
+
+	st.variance(lista): calcula la varianza
+
+	st.stved(lista): calcula la desviación estándar	
+
+
+#----------------------------------------------------------------------------------------------
+
+NumPy: Numerical Python
+
+Esta librería permite hacer operaciones a grandes datos, además de operaciones vectorizadas
+
+Posee también unos submódulos útiles:
+
+	numpy.fft (transformada de Fourier)
+
+	numpy.linalg (algebra lineal)
+
+	numpy.polynommial (polinomios)
+
+	numpy.random (generador de números)
+
+	
+#------------------------------------------------------------------------------------------------
+
+Numpy arrays (arreglos)
+
+>import numpy as np
+
+>num = np.linspace(0,1,50)
+
+	#genera 50 números equiespaciados en el rango desde 0 hasta 1
+
+>num = np.arange(0,1,0.1)
+
+	#genera números entre el 0 y el 1, separados entre sí por 0.1
+
+#------------------------------------------------------------------------------------------------
+
+Operaciones vectorizadas
+
+>import numpy as np
+
+>num= np.linspace(0,1,50)
+
+>np.abs(num) #valor absoluto de todo
+
+>np.exp(num) #exponencial
+
+>np.sin(num) #seno, ... ,etc
+
+>num.dot(num) #normas, producto interno, etc. (Se usa para calcular producto de vectores o matrices)
+
+#---------------------------------------------------------------------------------------------
+
+Matplotlib
+
+>import matplotlib.pyplot as plt
+
+Es una librería que sirve para crear gráficos y visualizaciones de datos.
+
+Una de las herramientas más usadas en ciencia, estadística, y biología porque permite graficar
+resultados de experimentos y/o análisis de datos
+
+#El módulo pyplot es la parte que más se usa
+
+#----------------------------------------------------------------------------------------------
+
+Ejemplo:
+
+>import numpy as np
+
+>import matplotlib.pyplot as plt
+
+>xs= np.linspace(0, 2*np.pi, 1000)
+
+>ys= np.sin(xs)
+
+>plt.plot(xs,ys)
+
+>plt.show()
+
+TIP: La documentación online se puede revisar en matplotlib.org 
+
+#----------------------------------------------------------------------------------------------
+
+
+#Mini ejercicio 1 funciono. El modulo operaciones se guardo en import_test_folder, y despues 
+#sus funciones se importaron por medio del PYTHONPATH al usar Python como consola
+
+#-----------------------------------------------------------------------------------------------
+
+Scipy
+
+Scipy es una librería de Python usada para cálculo científico avanzado, generalmente usada cuando Numpy ya no es
+suficiente
+
+Agrega herramientas más complejas para estadística, integración matemática, y análisis científicos, entre otros.
+
+Algunos ejemplos son:
+
+#---------------------------------------------------------------------------------------------------
+
+Scipy - Interpolación de datos
+
+Es un método matemático usado para estimmar valores desconocidos dentro del rango de un conjunto de datos conocidos
+
+	#Esto se usa para rellenar lagunas en tablas, suavizar curvas, mejorar precisión de análisis, y modelar
+
+Ejemplo:
+
+>import numpy as np
+
+>import matplotlib.pyplot as plt
+
+>from scipy import interpolate
+
+>x= np.linspace(0,8,5)
+
+>y= np.exp(-x/3)
+
+>f= interpolate.interp1d(x, y,kind)
+
+>xnew= np.linspace(0, 8, 100)
+
+>ynew= f(new)
+
+#En este caso, kind puede ser: "linear", "nearest", o "cubic" dependiendo del método de interpolación usado para estimar
+
+#------------------------------------------------------------------------------------------------------
+
+Scipy- Solución de ecuaciones ( f(x)= 0) )
+
+
+Solucionar ecuaciones significa encontrar el valor de x que resuelve una ecuación...
+
+Un ejemplo en biología sería encontrar en un modelode crecimiento poblacional el punto en que nacimientos=muertes,
+en otras palabras, crecimiento poblacional= 0
+
+Ejemplo:
+
+f(x) := x +sin x =  0
+
+>from scipy.optimize import root_scalar
+
+>def f(x): return x+sin(2*pi*x)
+
+>domx= np.linspace(-2, 2,1000)
+
+>domy= [f(x) for x in domx]
+
+>x0, x1= 3, -3
+
+>sol= root_scalar(f, x0=x0, x1=x1)
+
+>plt.scatter(sol.root, f(sol.root))
+
+>plt.plot(domx, domy); plt.show()
+
+#------------------------------------------------------------------------------------------------------
+
+Scipy - Minimización
+
+La minimización es el procesopor el cual se encuentra elvalor de una variable que hace que una función sea lo más
+pequeña posible (busca el mínimo de una función)
+
+Se utiliza mucho cuando se quiere ajustar modelos a datos o optimizar parámetros
+
+Un ejemplo en biología sería tener datos de crecimiento poblacionar, y querer ajustar el modelo a dichos datos,
+es decir, la tasa de crecimiento y el valor inicial que mejor ajustan los datos. (Básicamente regresión o ajuste
+de modelos)
+
+Ejemplo:
+
+>from scipy.optimize import minimize_scalar
+
+>def f(x): return sin(4*x)**2 + x**2
+
+>domx= np.linspace(-4, 4,1000)
+
+>domy= [f(x) for x in domx]
+
+>sol= minimize_scalar(f)
+
+>plt.scatter(sol.x, f(sol.x))
+
+>plt.plot(domx,domy); plt.show()
+
+#Las soluciones numéricas no son exactas!
+
+#------------------------------------------------------------------------------------------------------
+
+Pandas
+
+>import pandas as pd
+
+La librería pandas se usa para procesar datos, y es una de las más importantes para trabajar con tablas, pues
+permite leer, organizar, y manipular datos fácilmente
+
+Uno de las estructuras principalmente usadas en pandas son los  "dataframes" (tablas de datos), que pueden ser
+filtradas fácilmente
+
+#--------------------------------------------------------------------------------------------------------
+
+Ejemplo de "DataFrame":
+
+import pandas
+
+mydataset= {
+	"cars": ["BMW"mm, "Volvo", "Ford"],
+	"passings": [3, 7, 2]
+}
+
+myvar= pandas.DataFrame(mydataset)
+
+print(myvar)
+
+$	cars	passinngs
+ 0	BMW	3
+ 1	Volvo	7
+ 2	Ford	2
+
+#----------------------------------------------------------------------------------------------------------
+
+Pandas - Nombre de datos
+
+Es posible agregar nombre a los índices de los datos al momento de generar la tabla
+
+Ejemplo: Comparar las siguientes dataframes
+
+>data= {
+	"calories": [420, 380, 390],
+	"duration": [50, 40, 45] }
+
+>df1= pd.DataFrame(data)
+
+>print(df1)
+
+>df2= pd.DataFrame(data, index= ["day1", "day2", "day3"]
+
+>print(df2)
+
+#--------------------------------------------------------------------------------------------------------
+
+Pandas - Cargar datos
+
+es posible cargar datos a partir de archivos ya existentes
+
+Ejemplo: Asumiento que existe data.csv:
+
+>import pandas as pd
+
+>df= pd.read_csv("data.csv")
+
+	#Importante anotar los archivos como string ("")
+>print(df)
+
+#-------------------------------------------------------------------------------------------------------
+
+pandas -Explorando datos
+
+Es posible explorar los datos una vez ya estan en una dataframe
+
+>df= pd.read_csv("data.csv")
+
+>df.head(n): Muestra los primeros n datos
+
+>df.tail(n): Muestra los últimos n datos
+
+>df.describe(): Ver estadísticas descriptivas
+
+>df.sort_values (by= "A"): Ordenar según la columna "A"
+
+#------------------------------------------------------------------------------------------------------
+
+Pandas - Acceso a datos
+
+Es posible filtrar y extraer determinadas partes de las dataframes
+
+
+>df= pd.read_csv("data.csv")
+
+>df["A"]: Extrae la columna con etiqueta "A"
+
+>df[1:4]: Extrae ls filas en [1,4]
+
+>df[1:4] [["A", "B"]]: Filas y columnas
+
+#-------------------------------------------------------------------------------------------------------
+
+Filtros booleanos
+
+Es posible realizar filtro por máscara, o máscara booleana (matriz de valores True o False utilizada para filtrar
+elementos específicos en un conjunto de datos)
+
+Ejemplo:
+
+>df= pd.read_csv("data.csv")
+
+>df["Pulse]> 120
+
+>df[df["Pulse]> 120]
+
+
+EXTRA: https://pandas.pydata.org/docs/user_guide/10min.html (GUÍA DE USO DE PANDAS!)
+ 
+#--------------------------------------------------------------------------------------------------------
+
+
+
+

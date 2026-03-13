@@ -1,0 +1,190 @@
+#--------------------------------------------------------------------
+
+Apuntes Clase 2: Condicionales, Funciones, y Strings
+
+#-------------------------------------------------------------------
+
+Control de Flujo
+
+¿Qué son los condicionales?
+
+Los condicionales son funciones integradas en python que permiten controlar el flujo de un programa, y 
+que este tome decisiones, es cedir, que ejecuten un código solo si se cumplen determinadas condiciones
+
+#-------------------------------------------------------------------
+
+d = 1 (diametro igual a 1)
+
+
+if figuraEsCuadrado:
+
+	area= d**2 (d elevado a 2)
+
+#Si la figura es un cuadrado, o visto de otra manera, si "figuraesCuadrado is True" 
+
+elif figuraesCirculo:
+
+	area= pi * (d/2)**2
+
+#Se usa elif siempre que se ponga una o mas condiciones DESPUÉS de la primera
+
+else:
+
+	print("Error")
+
+#Se usa else para denotar cualquir situación en que no se cumplan los condicionales anteriores
+#Generalmente se usa para hacer que programa arroje "Errores"
+
+#-----------------------------------------------------------------------
+
+EXTRA:¿De qué sirven que un programa printee "Errores"
+
+La función principal de los errores es avisar, al momento de ejecutar un programa, si existe algún
+error en el programa y/o en una función específica, ya sea por una mala entrada del usuario (no esperada
+por el programa), o un FALLO en alguna de las funciones (énfasis en esto último!)
+
+#---------------------------------------------------------------------------
+
+Funciones
+
+Las funciones buscan reducir la complejidad a la hora de programar (dar instrucciones al PC),
+aumentando el flujo de trabajo, reduciendo tiempo en tareas, y básicamente haciendo menos tedioso
+el usar un PC con determinados fines.
+
+#-------------------------------------------------------------------------
+
+Ejemplo: Asumiendo que quiero calcular el IMC de 10 personas, podría ejecutar python como interfaz e ir
+haciendo a mano el cálculo para los datos de cada persona, guardando los resultados en variables por cada
+uno...
+
+o....
+
+Podría crear una función de cálculo de IMC y usarla desde unix (ejecutando python como programa) para cada
+persona, anotando como "input" sus datos...
+
+¿Cuál es más rápida? 
+
+Depende de la velocidad de mis dedos
+
+Pero y si fueran 200 personas...
+
+MUY probablemente el método de crear una función
+
+#------------------------------------------------------------------------
+
+¿Cómo crear una función?
+
+def function name (arg1,arg2, ...): permite crear una función, anotando la cantidad de argumentos
+
+	#...
+	return lavariabledondeguardolosresultados
+
+	#se puede omitir eso último (Ej: return None)
+
+Ejemplo:
+
+def calcularIMC (peso,altura):
+	return peso/altura**2
+
+
+
+La función "return" permite guardar una variable en la sesión una vez la función ha sido ocupada,no obstante
+si se usa con nuevos argumentos se sobreescribe la primera vez que se guardó asi que ojo!
+
+Además, no siempre mostrará los resultados al ejecutar el archivo.py, para eso se usa "print"
+
+#-------------------------------------------------------------------------
+
+La función print muestra el valor de una variable
+
+Ej: archivo test.py
+
+a=2
+
+b= 3*a
+
+print(b): En este caso lo que se observa al ejecutar python test.py es: 6
+
+#-------------------------------------------------------------------------
+
+Argumentos por defecto
+
+Al hacer funciones se pueden definir argumentos por defecto, en caso de que no se introduzca ninguna función
+
+Ej:
+
+def printName(nombre= "Nicolás", apellido= "Barnafi"):
+
+	print("Me llamo", nombre, " ", apellido)
+
+#En este caso se toma como argumento el arg1 nombre, y el arg2 apellido, teniendo por defecto ya uno
+#Después, en print pone la oración completa, haciendo una conjugación con comas.
+
+#--------------------------------------------------------------------------
+
+También se pueden pasar los argumentos a la función a partir de listas o diccionarios
+
+asumiendo la misma función anterior:
+
+lista= ["nico", "barnafi"]
+
+diccionario = {"nombre": "nico", "apellido": "barnafi"}
+
+#Ahora, para ejecutar la función pasando los argumentos desde lista y/o diccionario
+
+printName(*lista) #por lista
+
+o....
+
+printName(**kwargs) #por diccionario
+
+#siendo kwargs la abreviación de "keyword arguments"
+
+
+#----------------------------------------------------------------------
+
+Strings
+
+Las strings son un tipo de variable de dato que contiene texto
+
+Dicho texto esta compuesto de carácteres, los cuales pueden ser accedidos por componentes
+
+es decir...
+
+s= "hola"
+
+s[0]= "h"
+
+s[1]= "o"
+
+s[2]= "l"
+
+s[3]= "a"
+
+Tip: Poseen MUCHAS Funciones
+
+#--------------------------------------------------------------
+
+asumiendo s= "hola"
+
+s.upper()= "HOLA"
+
+s.lower()= "hola"
+
+s.find(´a´)= 3 (entrega el índice de la posición de a en el string)
+
+Tip: Las funciones de strings se pueden ver con dir(s)
+
+Todas estas funciones entregan nuevos strings, dejando el original intacto
+
+#------------------------------------------------------------------
+
+La librería string
+
+Las librerías agregan más funciones específicas a las funciones ya presentes en el lenguaje
+
+¿Cómo se importan?
+
+import string
+
+

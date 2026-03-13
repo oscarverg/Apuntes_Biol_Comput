@@ -1,0 +1,329 @@
+#----------------------------------------------------------------------------------------
+
+Apuntes Clase 5: Clases y polimorfismo
+
+#-----------------------------------------------------------------------------------------
+
+Clases y Objetos
+
+La motivación de su uso viene de la Programación Orientada a Objetos (POO), que busca organizar mejor el código
+cuando los programas se vuelven muy grandes o complejos
+
+Ejemplo:
+
+Se esta trabajando con organismos en un modelobiológico
+
+nombre= "Krill"
+edad= 2
+tamano= 4.5
+
+def crecer(tamaño):
+	return tamano + 0.5
+
+#Al trabajar con un solo organismo se hace fácil, sin embargo, cuando hay muchos el código se vuelve difícil de 
+#manejar
+
+¿Habrá que definir todas esas caracteristicas cada vez que tengamos un nuevo organismo?
+
+#-----------------------------------------------------------------------------------------
+
+Para eso existen las clases, que permiten definir un tipo de objeto que tiene atributos (datos), y métodos (funciones
+que actúan sobre los datos)
+
+Ejemplo:
+
+class Organismo:
+
+	def __init__ (self, nombre, edad, tamano):
+		#self es obligatorio para poder construir la clase
+
+		self.nombre= nombre
+
+		self.edad= edad
+
+		self.tamano= tamano
+		#es necesario definir las variables como lo ingresado en la clase, ya que son distintas!
+
+	def crecer (self):
+
+		self.tamano += 0.5
+
+#De esta forma se pueden crear objetos!
+
+krill= Organismo("Krill", 2, 4.5)
+
+krill.crecer()
+
+print(krill.tamano)
+
+#--------------------------------------------------------------------------------------
+
+Polimorfismo
+
+El polimorfismo en POO se refiere a que una misma operación (o método) puede comportarse de manera diferente dependiendo
+del objeto que lo use
+
+Ejemplo conceptual:
+
+objeto.hacer_sonido()
+	#Hacer sonido es el método (función)
+
+Perro -> ladra 
+Gato -> maulla
+Pato -> grazna
+
+#--------------------------------------------------------------------------------------
+
+Ejemplo simle:
+
+class Perro:
+	def sonido(self):
+	print ("Guau")
+
+class Gato:
+	def sonido(self):
+	print ("Miau")
+
+class Pato:
+	def sonido(self)
+	print ("Cuac")
+
+
+#Ahora:
+
+animales= [Perro(), Gato(), Pato()]
+
+for a in animales:
+	a.sonido()
+
+#El programa usa el mismo método (sonido),pero cada objeto responde distinto
+
+#---------------------------------------------------------------------------------------
+
+Documentación
+
+Cuando uno crea código, es común que el código envejezca, y que se olvide la función de cada línea, pues la memoria
+humana es frágil. Y si es así para nosotros, imagina como será para un nuevo usuario!
+
+La documentación es el conjunto de explicaciones escritas que describen cómmo funciona un código, una función, una
+clase o una librería
+
+Su principal objetivo es que tú mismo (u otras personas en el futuro) puedan entender que hace el código, su uso,
+que entradas necesita, y que resultados produce (o se esperaría que produzca)
+
+#--------------------------------------------------------------------------------------
+
+Ejemplo de documentación: Docstrings
+
+#Para iniciar un párrafo de documentación es necesario usar un entre comillas, con 3 comillas en cada extremo
+
+#Se recomienda en la documentación incluir: su propósito, los argumentos que espera (y su tipo de variable), sus
+#salidas (y que tipo de variable son), y en que condiciones arrojan error (si es que lo hacen)
+
+
+def suma(x,y):
+
+	"""
+	Esta función entrega la suma de sus argumentos.
+	args:
+		x: un elemento sumable
+		y: un segundo elemento sumable
+	Return: suma de entradas (Int)
+	"""
+
+	z= x+y
+	return z
+
+#En este ejemplo se hace documentación para la función "suma()", que suma dos argumentos entregados
+
+#------------------------------------------------------------------------------------
+
+Después se puede acceder a dicha documentación (y verla) se puede usar el comando help(suma), que entregará la
+documentación de la función suma(x,y) 
+
+
+#-----------------------------------------------------------------------------------
+
+Ejemplo de Docs de una clase:
+
+class Vec2D:
+	"""
+	Clase que representa un vector en R2.
+	"""
+
+	def __init__ (self,x,y):
+		"""
+		Constructor, toma como parámetros coordenadas x e y.
+		"""
+
+		self.x= x
+		self.y= y
+
+	def norma(self):
+
+		"""
+		Entrega la norma euclideana del vector. Requiere "sqrt"
+		"""
+
+		return sqrt(self.x**2 + self.y**2)
+
+#---------------------------------------------------------------------------------
+
+Documentación avanzada
+
+Existe mucho software (sphinx, Doxygen, etc). Por motivos de este curso veremos Mkdocs.
+
+#pip installmkdocs
+#mkdocs new proyecto
+#cd proyecto 
+#mkdocs serve (crea un servidor local)
+#mkdocs build (genera el sitio web final)
+
+	#Se usa formato Markdown (popular por ser simple)
+
+#--------------------------------------------------------------------------------
+
+Mkdocs 
+
+Mkdocs es una herrammienta para crear sitios web de documentación a partir de archivos Markdown
+
+Se usa en muchos proyectos de Python y software científico
+
+La idea es:
+
+archivos.md (Markdown) -> Mkdocs -> sitio web de documentación
+
+Se pueden documentar: script de Python, una librería, proyectos, pipeline de análisis, entre otros
+
+
+#---------------------------------------------------------------------------------
+
+Otra opción: pdoc3
+
+#pip install pdoc3
+
+#cd proyecto
+
+#pdoc3 --html
+
+pdoc3 también es una herramienta para generar automáticamente documentación de código Python a partir de docstrings
+
+#-------------------------------------------------------------------------------
+
+Testing
+
+A la hora de escribir código se hace difícil revisar, sobre todo en archivos y programas grandes, cada línea de
+código en busca de un error, o algo que pueda lograr de forma más eficiente
+
+y sobre todo...
+
+cuando el script daun error buscar que línea específica está fallando
+
+#---------------------------------------------------------------------------------
+
+Esto motiva el uso de una cadena de pruebas automáticas para lograr determinar lo anterior
+
+Pero... ¿Cómo lo hacemos?
+
+#----------------------------------------------------------------------------------
+
+Pytest
+
+pytest es una librería de Python usada para probar automáticamente que el código funciona correctamente
+
+Se usa para escribir tests (pruebas) que verifican si tus funciones producen los resultados esperados. La idea es que
+pytest verifique si todo funciona bien
+
+#pip install pytest
+
+#-------------------------------------------------------------------------------------
+
+Ejemplo pytest
+
+Supongamos que tenemos un archivo llamado "matematica.py":
+
+#def suma(a,b):
+	#return a+b
+
+Ahora creamos un archivo de test llamado: "test_matematica.py":
+
+#from matematica import suma
+
+#def test_suma():
+	#assert suma(2,3) == 5
+
+assert verificará que el resultado sea correcto
+
+Ahora desde la terminal ejecutamos pytest desde la terminal
+
+$pytest
+
+#Si la función devuelve 5 el test pasa; si no lo hace (o devuelve otro número) el test falla
+
+#----------------------------------------------------------------------------------
+
+Se pueden probar muchas cosas a partir de una misma función:
+
+def test_suma_positivos():
+	assert suma(2,3)  == 5
+
+def test_suma_negativos():
+	assertsuma(-2,-3) == -5
+
+def test_suma_cero():
+	assert suma(5,0) == 5
+
+#pytest ejecutará todos los tests automáticamente
+
+#----------------------------------------------------------------------------------
+
+Github
+
+#sudo apt update
+
+#sudo apt install git
+
+#git --version (corroborar que fue instalado)
+
+Github es una plataforma en línea que permite guardar, compartir y colaborar en proyectos de
+programación usando Git
+
+	Git: Sistema para controlar versiones de código
+
+	Github: Sitio web donde se alojan los repositorios Git
+
+Github sirve para guardar código en la nube, colaborar con otras personas, llevar un historial 
+de cambios, y compartir proyectos publicamente
+
+	Esto lo hace esencial en áreas como desarrollo de software, ciencia de datos, bioinformática, y
+	proyectos científicos
+
+El flujo de trabajo básico es:
+
+	tu computador -> git commit -> git push -> Github (repositorio en línea)
+
+y para descargar cambios:
+
+	Github-> git pull -> tu computador
+
+Extra Tip:Hay un tutorial online en https:/www.w3schools.com/git/
+
+Algunos códigos útiles: 
+
+#git clone "enlace_repositorio" (sirve para copiar un repositorio de github a tu computador)
+
+#git status (muestra el estado actual del repositorio)
+
+#git add (sirve para preparar archivos para guardarlos en git)
+
+#git commit (guarda los cambios en el historial del repositorio)
+
+#git push (sube los cambios desde tu computadora a GitHub)
+
+#git pull (descarga cambios desde GitHub a tu computador)
+
+#git remote -v (muestra el repositorio remoto conectado)
+
+#git init (crea un repositorio Git nuevo en una carpeta)
+
+

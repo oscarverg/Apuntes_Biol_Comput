@@ -1,0 +1,136 @@
+#----------------------------------------------------------------------------------
+
+Apuntes Clase 2: Estructura de datos e iteradores
+
+#-------------------------------------------------------------------
+
+Las funciones, como vimos anteriormente, nos permiten hacer mucho más fácil el cálculo de una
+gran cantidad de datos
+
+No obstante, a la larga se vuelve impractico tener una gran cantidad de datos
+
+En el ejemplo del cálculo de IMC se haría tedioso tener que estar usando la misma función 100 veces
+para 100 personas distintas
+
+#---------------------------------------------------------------
+
+Una lista es una estructura de datos que permite guardar en una sola variable(de tipo list) muchos valores
+
+Esta lista después puede ser recorrida (iterada), por ejemplo mediante un ciclo for
+
+Las listas no tienen un tipo específico,  esdecir, que pueden contener valores con distintos tipos dentro
+
+Ej: a= [1, -1, 2.65, "hola"]
+
+Cada uno de estos elementos puede ser accedido mediante su posición como componente (a[0]= 1)
+
+#----------------------------------------------------------------
+
+Bucle for
+
+Un ciclo for es una estructura que permite repetir una acción varias veces (iterar)
+
+Se usa normalmente para recorrer elementos de una colección (lista, diccionario, tupla...)
+
+Ej:
+
+lista=[1,2,3,4,5]
+
+for e in lista:
+	print(e)
+
+#El resultado es:
+#1
+#2
+#3
+#4
+#5
+
+Tip: el comando range(10) permite iterar sobre un rango de números, desde el 0 hasta el 9
+
+
+#-------------------------------------------------------------------
+
+ Otros Tipos de Lista
+
+Tupla: a=(1,2,7,8)
+#Listas inmodificables
+
+Diccionarios: a={"altura": 1.80 , "peso":90}
+
+#Se acceden con a["altura"]
+
+Conjuntos: a= {1,5,9}
+
+#-------------------------------------------------------------------
+
+Iteraciones
+
+En ocasiones solo debemos iterar hasta haber cumplido algún criterio
+
+En esos casos, se puede usar la función while
+
+#while condition: (siendo condition un booleano)
+
+	#codigo
+	#mientras condition sea True el código se volverá a ejecutar
+
+#------------------------------------------------------------------
+
+Ejemplo: Ahorrar con break/continue
+
+plata=0
+#contador de plata
+
+dias=0
+#contador de dias
+
+while True:
+	if dia == "sabado" or dia == "domingo":
+
+		dia= avanzarDia(dia)
+
+		dia += 1
+		
+		continue (con esto vuelve al inicio del while)
+		#Con esta sección avanza el día si es sabado o domingo, ya que esos días no se trabaja
+
+	plata += trabajar()
+	#los dias de semana la funcion trabajar va acumulando valor en plata
+
+	if plata >= objetivo:
+
+		break (con esto sale del while)
+		#Si plata llega al objetivo se termina el while
+
+	dia = avanzarDia(dia)
+	
+	dias += 1
+	#Si plata no llega al objetivo avanza el dia
+
+
+print ("Meta alcanzada en {} días" .format(dias))
+#Una vez alcanza la meta (terminando el ciclo while), imprime el mensaje de meta alcanzada en X días.	
+
+
+#--------------------------------------------------------------------
+
+Juntar listas:
+
+apellidos= ["Nguyen", "Janssen", "Smith"]
+ids= [100, 101, 102]
+
+for apellido, id in zip(apellidos,ids):
+	[...]
+
+#zip une el primer elemento de una lista con el primero de otra, el segundo con el segundo, y así...
+#como si fuera un cierre
+
+#------------------------------------------------------------------
+
+Agregar contador
+
+for i,apellido in enumerate(apellidos):
+	[...]
+
+

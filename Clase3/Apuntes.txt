@@ -1,0 +1,138 @@
+#-----------------------------------------------------------------------
+
+Apuntes Clase 3: Input/Output,Interactividad
+
+#-------------------------------------------------------------------------------
+
+Input/Output
+
+
+Al momento de procesar datos existe una complicación cuando intentamos con archivos demasiado grandes
+por ejemplo, un genoma de krill, que pesa más de 10 Gb. (LA CPU procesa hasta 64 Kb a la vez)
+
+Es por esto que necesitamos procesar los datos en streams en lugar de cargar todo en la memoria de una
+sola vez 
+
+Extra: Lo último puede provocar un uso excesivo de la RAM, programas lentos, e incluso un crash del
+sistema
+
+**Los computadores trabajan con bloques pequeños de información**
+
+#-------------------------------------------------------------------------------
+
+¿Qué hacemos?
+
+El streaming de datos es una solución, también conocido como procesar pequeños fragmentos de un
+archivo grande
+
+Ejemplo:
+
+with open ("genome.fasta") as f:
+	for linea in f:
+		procesar(linea)
+
+#De esta forma: Se lee una linea del archivo, se procesa, y se descarta de la memoria antes de
+#seguir con la siguiente!
+
+#------------------------------------------------------------------------------
+
+Lectura de Archivos
+
+open(ruta, modo): función de python que abre archivos. El primer argumento es la ruta del archivo,
+		  mientras que el segundo argumento es el modo de apertura
+
+Existen varias formas de apertura de un archivo:
+
+	r: leer (solo lectura, da error si no existe)
+
+	w: escribir (sobrescribe el archivo, escribe si no existe)
+
+	a: agregar (a arhivo al final, lo crea si no existe)
+
+	x: crea archivo (error si ya existe)
+
+	rb: leer binario
+
+Ejemplo:
+
+f= open("../archivos/pangrams.txt", "r")
+
+f.read() (lee todo el archivo)
+
+f.readline() (lee una sola línea cada vez)
+
+f.readlines() (lee todas las líneas pero las guarda en una lista)
+
+f.close() (libera el archivo de la memoria)
+
+	#MUUUUY IMPORTANTE PARA EVITAR ERRORES, GESTIONAR RECURSOS DEL SISTEMA, Y PREVENIR CORRUPCIÓN
+	#DE ARCHIVOS!!!
+
+#------------------------------------------------------------------------------
+
+¿Porqué es esto importante?
+
+Porque casi todos los datos biológicos se leen así:
+
+#archivos fasta, fast1(secuenciación), csv(tablas), tsv(datasets)
+
+#----------------------------------------------------------------------------
+
+Comúnmente se usa con with para que cierre automáticamente
+
+Ejemplo:
+
+with open("ejemplo.txt", "w") as f
+
+	f.write("textonuevo")
+
+	#Aquí finaliza with, y cierra el archivo
+
+#-------------------------------------------------------------------------
+
+Scripts Interactivos
+
+Correr el mismo código para una variable a en 15 archivos distintos se vuelve tedioso, y poco
+transferible,en caso de que la variable posea distintos nombres
+
+Ejemplo:
+
+a=2
+textfile= "../carpeta/archivo.txt"
+procesar(a, textfile)
+
+Para esto podemos buscar la solucion fuera del código
+
+#--------------------------------------------------------------------------
+
+Solución 1: Frenar ejecución hasta que el usuario entregue un valor
+
+**INPUT**
+
+a=input("Ingrese valor de "a": ")
+
+print(a, type(a))
+
+El valor ingresado es un string
+
+#---------------------------------------------------------------------------
+
+Solución 2: Usar parámetros de programa
+
+#programa.py
+
+from sys immport argv
+
+name= argv[0]
+arg1= argv[1]
+arg2= argv[2]
+
+print("argv:", name, arg1, arg2)
+
+Luego en bash:
+
+$python programa.py "hola" 42
+
+argv: programa.py hola 42
+
+

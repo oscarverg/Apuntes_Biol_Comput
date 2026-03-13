@@ -1,0 +1,171 @@
+
+#-------------------------------------------------------------
+
+Apuntes Clase 01: Programación, Lenguajes y Python
+
+#------------------------------------------------------------
+
+Programar es darle instrucciones a la computadora para que realice algo
+
+Un lenguaje de programación es, por tanto, un set de instrucciones especificas
+
+#--------------------------------------------------------------
+
+Un ejemplo de esto es, por ejemplo, hacer un seguimiento de los pacientes con una enfermedad
+
+¿Cómo?
+
+Mediante la programación se puede registrar los números de inflamaciones de los pacientes por día
+(hacer un seguimiento), visualizar esos datos, y realizar pruebas estadísticas para llegar a conclusiones
+
+#---------------------------------------------------------------
+
+Un sistema operativo es un conjunto de programas que coordinan el funcionamiento de la computadora
+(gestionar memoria, procesador, dispositivos entrada/salida, almacenamiento, etc).
+
+¿Porque Linux es más popular que Windows?
+
+Menos susceptible a virus y malware
+
+Actualizaciones gratuitas y regulares (en seguridad y nuevas funciones)
+
+Comunidad activa
+
+Compatibilidad con variedad de equipos y dispositivos especializados
+
+#--------------------------------------------------------------------------
+
+LA CONSOLA
+
+Es la forma de interacción con el PC, que funciona a través de programas y comandos básicos
+
+#-------------------------------------------------------------------------
+
+Navegación básica
+
+ls: mostrar contenido de carpeta
+
+cd: cambiar de directorio
+
+cd .. : retroceder un espacio
+
+cd / : retroceder el máximo
+
+cd "nombre_carpeta" : ingresar en la carpeta
+
+mkdir: crear carpeta
+
+rm: Eliminar archivo
+
+rmdir: Eliminar carpeta
+
+cp: Copiar archivo o carpeta
+
+nano "nombre archivo.txt": Editor de texto (o programa, si termina en .py)
+
+cat: mostrar archivo (en el caso de texto mostrara el texto escrito dentro de un archivo de texto
+
+Pro-tip:Autocompletar con tab
+
+#----------------------------------------------------------------------------------
+
+La Compilación es el proceso por el cual el computador traduce nuestras oraciones al lenguaje del PC, en
+ceros y unos (Ej:010001011010010)
+
+Como ventaja, tiene que es muy eficiente a la hora de traducir código y transformarlo en un programa
+
+Como desventaja, es muy inflexible a la hora de traducir a lenguaje computador, es decir, si nos equivocamos
+en una sola letra el computador no podrá traducir adecuadamente las oraciones a programa
+
+Es por esto que estos lenguajes requieren recompilar constantemente el código
+
+#-----------------------------------------------------------------------------------
+
+Un ejemplo de esto son los comandos básicos ya vistos "ls", "cd", ... 
+
+Si usamos el código "lss" no se realizará la función de mostrar la lista de archivos dentro de una carpeta
+
+#--------------------------------------------------------------------------------------
+
+La alternativa a esto son los Lenguajes Interpretados, que poseen muchos subprogramas pre-compilados, y que
+se ejecutan secuencialmente (linea por linea)
+
+#---------------------------------------------------------------------------------------
+
+Ejemplos:
+
+Lenguajes Compilados: C,C++, Java
+
+Lenguajes Interpretdos: Python, R, MATLAB
+
+#---------------------------------------------------------------------------------------
+
+Python es un lenguaje interpretado, orientado a objetos, basado en C
+
+Ejecuta extensiones .py
+
+Posee muchas librerías científicas, y es un lenguaje comúnmente usado en ciencia
+
+#---------------------------------------------------------------------------------------
+
+¿Cómo usarlo desde Unix?
+
+Como programa, desde una carpeta con el archivo.py escribes: "python test.py"
+
+Si para llegar al archivo hay que atravesar más carpetas se anota la ruta separada por "/":
+
+"python carpeta1/carpeta2/test.py"
+
+
+Como consola interactiva escribimos solamente: "python" o "python3", dependiendo de la versión
+
+#-------------------------------------------------------------------------------------
+
+Tipos de variables
+
+a= 2: int(entero)
+
+a= 2.0: float(decimal o "punto flotante")
+
+a= "hola": string(texto)
+
+a= True: bool (booleano)
+
+Tip: La función "type()" permite saber el tipo de una variable
+
+#---------------------------------------------------------------------------------------
+
+Aritmética
+
+La división entre enteros (int) siempre dara un float, y siempre se aplicará exclusivamente al numero
+precedente (de izquierda a derecha)
+
+Ej: 2/2= 1
+
+Ej2: 2/2*2= 2
+
+Ej3: 2/2/2= 1/2= 0.5
+
+#--------------------------------------------------------------------------------------
+
+Algebra Booleana
+
+and: un producto de dos pecedencias (Ej: se necesitan de "los dos" para un condicional o función)
+
+or: suma de dos precedencias (Ej: se necesita de cualquiera de los dos para un condicional o función)
+
+not: (Ej: no se necesita de "ese" para un condicional o función)
+
+==: establece que "A" es igual a "B", y en función de eso arroja un True (iguales) o un False (distintos) 
+
+	Ej: 2 == 2: True  ; 3 == 2: False
+
+!=: establece que "A" es distinto a "B", y en función de eso arroja un True (distintos) o un False (iguales)
+ 
+<=: establece que "A" es menor o igual que "B", y en función de eso...
+
+>=: establece que "A" es mayor o igual que "B", y en función de eso...
+
+<: establece que "A" es menor que "B"...
+
+>: establece que "A" es mayor que "B"...
