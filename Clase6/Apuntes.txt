@@ -1,0 +1,474 @@
+#---------------------------------------------------------
+
+Apuntes Clase 6: Introducción a R, bash, y orquestación
+
+#--------------------------------------------------------
+
+Motivación: 
+
+Cada lenguaje tiene distintas fortalezas
+
+Ejemplo: R es especializado en estadística (interpretado, sin objetos)
+	Bash es usado para conectar resultados (NetFlow, Snakemake)
+
+#---------------------------------------------------------
+
+R
+
+R es un lenguaje de programación diseñado pricipalmente para estadistica,análisis de datos, y 
+visualización científica. Es muy usado en biología, bioinformática, ecología, y ciencia de datos
+
+La ejecución de R, al igual que python, se puede hacer a través de la consola de bash o como programa
+
+Desde consola:
+
+	$R
+
+	> 2 + 2
+
+	[1] 4
+
+	>q() (salir de la consola)
+
+
+Como programa:
+
+	$ Rscript test.r
+		#Ejecutar script con "2+2"
+
+	[1] 4 
+		#Resultado
+
+#-----------------------------------------------------------
+
+Sintaxis en R: Tipos de variables
+
+	String: "hola"
+
+	Números: 1, 3.5
+
+	Comentario: #características de una función
+
+	Imprimir: print ("hola")
+
+	Asignar variable: a=2, a<-2, 2->a
+
+	Variables pueden tener puntos: .a=2
+
+	Sumar strings: Da Error!!!
+
+		paste("hola","chao")
+
+	Números son "numeric" por defecto (ver con class)
+
+	Booleanos: TRUE, FALSE (en mayúsculas)
+
+#------------------------------------------------------------
+
+Tipos de variables II
+
+Tienen nombres específicos:
+
+	numeric: 4, 5.5, -2
+
+	integer 1L,-3L, 100L
+
+	complex: 9 + 3i
+
+	character (strings)
+
+	logical (booleanos)
+
+
+Convertir números:
+
+	as.numeric()| as.integer()| as.complex()
+
+#------------------------------------------------------------
+
+Sintexis de R:Operaciones
+
+	Booleanos: a&b (and), a|b (or), !a (not)
+
+	Comparación: a<b. a<=b, 3==3, 3!=2
+
+	Números: 2+2, 2*3, 2**3==2^3, 10%%3
+
+#---------------------------------------------------------
+
+Sintaxis de R: if/else
+
+	a= 2
+	b= 3
+
+	if (a>b) {
+		print("a>b)
+
+		}
+
+	else if (a==b) {
+
+		print("a==b")
+
+		}
+
+	else { #a<b"
+
+		print("a<b")
+
+		}
+
+
+#------------------------------------------------------------
+
+Sintaxis de R: while
+
+i <- 0
+
+while (i < 6) {
+	i <- i+1
+	if (i==3) {
+		next
+
+	}
+
+	print(i)
+
+	}
+
+#----------------------------------------------------------
+
+Sintaxis de R: Ciclos for
+
+for (x in 1:10) {
+	print(x)
+	}
+
+fruits <- list("apple", "banana", "cherry")
+
+for (x in fruits) {
+	print(x)
+	}
+
+#----------------------------------------------------------
+
+Sintaxis de R: Funciones
+
+my_function <- function  (x,y=2) {
+
+	return (5*x*y)
+
+	}
+
+print(my_function(e)) #y=2 por defecto
+
+
+#--------------------------------------------------------
+
+Sintaxis de R: Estructura de datos
+
+	Vector de un solo tipo: c(1,2,3), 1:10
+
+	Lista: list(1, 2i, TRUE)
+
+	Largo: length (lista)
+
+	Agregar: append(lista, "hola")
+
+	Quitar: lista[-1], lista[-c(1,3)]
+
+	Acceso por rango: lista[2:5]
+
+	*Ojo: Listas empiezan en 1
+
+#-------------------------------------------------------
+
+Sintaxis de R: DataFrame
+
+Data_Frame <- data.frame (
+	Training= c("Strength", "Stamina", "Other"),
+
+	Pulse= c(100, 150, 120),m
+
+	)
+
+Data_Frame
+
+#Todos equivalentes:
+
+Data_Frame[1]
+
+Data_Frame[["Training"]]
+
+Data_Frame$Training
+
+#------------------------------------------------------
+
+Explorando datos en R
+
+Data.Cars <- mtcars
+
+dim(Data.Cars)
+
+names(Data.Cars)
+
+rownames(Data.Cars)
+
+Data.Cars$cyl #Comparar con Data.Cars["cyl"]
+
+summary(Data.Cars)
+
+max(iris["Petal.length"])
+
+which.max(iris$Petal.length)
+
+mean(iris$Petal.Length)
+
+#-------------------------------------------------------------
+
+#Si which solo opera sobre vectores,como extraigo por nombre?
+
+datos= iris$"Petal.length"
+
+filas= rownames(iris)
+
+indx_max= which.max(datos)
+
+filas[indx_max]
+
+#..............................................................
+
+Estadística en R
+
+model= lm(Petal.Length ~ Sepal.Length, data=iris)
+
+summary(model)
+
+b= model$coefficients[1]
+
+m= model$coefficients[2]
+
+minx= min(iris$Sepal.Length)
+
+maxx= max(iris$Sepal.Length)
+
+plot(c(minx, maxx), c(b+ mminx*m, b+maxx*m),
+	type="p", col="blue")
+
+
+#--------------------------------------------------------------
+
+Bash
+
+Es un lenguaje de comandos usados para interactuar con el sistema operativo desde la terminal
+(en este caso, Unix). 
+
+Se usa principalmente en sistemas Linux y Unix para ejecutar programas, manipular archivos, y
+automatizar tareas
+
+Extra: Es una versión mejorada del shell original llamado "Bourne Shell"
+
+¿Cómo navegar en bash?
+
+cd: cambiar de directorios
+ls:mostrar lista de elementos dentro de un directorio
+#Se autocompleta con Tab!!
+
+#------------------------------------------------------------------
+
+Las variables en Bash solo tienen validez en la terminal actual (es decir,si la cierro las pierdo)
+
+Se pueden mantener en sub-terminales con export
+
+Sintaxis sin espacios
+
+#----------------------------------------------------------------
+
+Sintaxis de Bash: if
+
+
+if [condition]; then {
+	#código por ejecutar
+}
+
+
+elif [condition2]; then {
+	#más codigo
+}
+
+
+else {
+	#código final
+}
+
+fi
+
+#-----------------------------------------------------------------
+
+Notación de operaciones booleanas en bash
+
+-gt: >
+
+-ge: >=
+
+-lt:<
+
+-le: <=
+
+!: not
+
+-a: and
+
+-o: or
+
+-e: ver si existe archivo
+
+-d: ver si existe carpeta
+
+-n: ver si existe variable
+
+#--------------------------------------------------------------------
+
+Sintaxis en bash: ciclos for
+
+for n in a b c;do
+	echo "$n"
+done
+
+Wildcards:
+
+	*.csv -> todos los archivos terminados en csv
+	*{csv, xls, txt} -> todos los archivos csv, xls,o txt
+
+#---------------------------------------------------------------------
+
+Sintaxis en bash: Funciones
+
+function helloWorld{
+	echo"Hello World"
+}
+
+
+#Equivalente:
+
+helloWorld() {
+	echo "Hello World"
+}
+
+
+#---------------------------------------------------------------------
+
+Funciones: argumentos
+
+function helloWorld {
+	echo "$1" #o echo "f{1}"
+}
+
+*$1, $2, ...: parámetros en orden
+
+*$0: nombre de función
+
+*$#: Número de argumentos
+
+*$@: Todos los argumentos
+
+#---------------------------------------------------------------------
+
+source vs bash
+
+Source y Bash se diferencian en commo se ejecuta un script dentro de la terminal. Ambos requieren
+ejecutar archivos .sh, sin embargo, lo hacen en entornos distintos, y eso cambia el comportamiento
+de variables y configuraciones.
+
+
+
+*Source: ejecutar en proceso actual
+
+	$source script.sh
+
+		#script se ejecuta en la terminal actual
+
+
+*Bash: Crear sub-proceso
+
+	$sh script.sh #0 "bash script.sh"
+
+
+		#crea una nueva subshell (nueva instancia de bash), y ejecuta el  script dentro de esa
+		#instancia. Al terminar, esa subshell desaparece
+
+
+Consecuencias:
+
+1. se pueden perder variables(export)
+
+2. si source sale(exit), se cierra consola
+
+#----------------------------------------------------------------------
+
+Pipes y redirecciones
+
+Una pipe en Bash es un mecanismo que permite conectar la salida de un comando con la entrada de otro
+comando
+
+Se representa con el símbolo |
+
+Idea basica:
+
+1 - Normalmente un comando produce una salida (output)
+
+2 - Con una pipe, esa salida sepuede enviar directamente a otro comando
+
+Ejemplo:
+
+$ls | comando2
+
+#Este comando produce una salida de lista de elementos en el  directorio, y automáticamente los pasa
+#por la función "comando2" (que podría, por ejemplo, ordenar dichos elementos)
+
+#-----------------------------------------------------------------------
+
+Ejemplo 2 Pipelines:
+
+$echo "hola"
+	#imprime hola
+
+$echo "hola" > out.txt
+	#Toma el texto generado por "echo" y lo pone en "out.txt"
+
+$echo "hola" >> out.txt
+	#Toma el texto y lo pone al final de "out.txt"
+
+$cat "out.txt" | grep "ho"
+	#Toma salida de "cat out.txt", y lo entrega como input a grep
+
+$cat "in.txt" | tee out.txt
+	#Toma la salida del primer comando, 1) la imprime y 2) la guarda en out.txt
+
+$echo < in.txt
+	#Entrega contenido de "in.txt" a función "echo"
+
+
+#-----------------------------------------------------------------------
+
+Usar salidas
+
+*Usar el valor de la variable:
+
+	$ echo VARIABLE= "${VARIABLE}"
+
+
+*Usar la salida de un código:
+
+	$ A= $(python codigo.py)
+
+	$ B= $(head "$A")
+
+*Resultado de operaciones (+,-,*,/) [int]
+
+	$ B= 3
+	$ A= $((2+$B))
+
+#-----------------------------------------------------------------------
+
+
